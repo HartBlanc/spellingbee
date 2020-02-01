@@ -43,7 +43,7 @@ def solve(std_letters, special_letter, min_length="4"):
 #         words = f.read().split('\n')
 
 #     words = sorted(
-#         [w.lower() for w in words],
+#         {w.lower() for w in words},
 #         key = lambda x : len(x),
 #         reverse=True,
 #     )
@@ -52,6 +52,5 @@ def solve(std_letters, special_letter, min_length="4"):
 #         for w in words:
 #             f.write(w)
 #             f.write('\n')
-
 
 
