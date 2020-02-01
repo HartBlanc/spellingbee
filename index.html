@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>sendToKindle</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/space10-community/conversational-form@0.9.90/dist/conversational-form.min.js" crossorigin></script>
+
+  <style>
+    #topbar {
+      position: fixed;
+      background-color: #EEEEEE;
+      height: 50px;
+      width: 100%;
+      left: 0px;
+      top: 0px;
+      display: flex;
+      align-items: center;
+    }
+
+    #iconset {
+      display: flex;
+      justify-content: flex-end;
+      flex-basis: 10%;
+    }
+
+    #iconset img {
+      width: 50px;
+      height: 50px;
+    }
+
+    #page-name {
+      font-family: "Bodoni MT", Didot, "Didot LT STD", "Book Antiqua", Garamond, "Times New Roman", serif;
+      flex-grow: 1;
+      font-size: 7vw;
+      text-align: center;
+      margin: 0px;
+    }
+
+    #name-box {
+      flex-basis: 90%;
+    }
+
+    @media screen and (min-width: 600px) {
+      #page-name {
+        font-size: 42px;
+      }
+    }
+
+    form {
+      margin-top: 55px;
+      height: calc(100vh - 55px);
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav id="topbar">
+    <div id="name-box">
+      <p id="page-name"> SendToKindle </p>
+    </div>
+    <div id="iconset">
+      <img src="https://cdn.pixabay.com/photo/2017/01/31/00/03/currency-2022440_960_720.png" alt="money bag">
+      <img src="https://cdn.pixabay.com/photo/2016/03/31/18/24/screwdriver-1294338_960_720.png" alt="screwdriver and spanner">
+      <img src="https://cdn.pixabay.com/photo/2013/07/12/12/56/home-146585_960_720.png" alt="home icon">
+    </div>
+  </nav>
+  <form cf-form method="get" action="https://98ei1mnnc9.execute-api.eu-west-2.amazonaws.com/boksearch">
+    <label for="std_letters">What are the standard letters?</label>
+    <input type="text" name="std_letters" required="" placeholder="(e.g. abcdef)">
+    <label for="special_letter">What is the special letter?</label>
+    <input type="text" name="special_letter" required="" placeholder="(e.g. c)">
+    <label for="min_length">What is the minimum word length?</label>
+    <input type="number" min="1" max="30" name="min_length" required="" placeholder="4">
+    <input type="submit" value="Solve!">
+  </form>
+</body>
+
+</html>
