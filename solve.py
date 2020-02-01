@@ -37,3 +37,21 @@ def solve(std_letters, special_letter, min_length="4"):
     # pattern = re.compile(f"[{''.join(allowed_letters)}]*{special_letter}[{''.join(allowed_letters)}]*")
     
     # return [w for w in words if re.match(pattern, w) and len(w) >= min_length]
+
+# if __name__ == "__main__":
+#     with open("words_alpha.txt") as f:
+#         words = f.read().split('\n')
+
+#     words = sorted(
+#         [w.lower() for w in words],
+#         key = lambda x : len(x),
+#         reverse=True,
+#     )
+
+#     with open("words_alpha.txt", "w") as f:
+#         for w in words:
+#             f.write(w)
+#             f.write('\n')
+
+
+
