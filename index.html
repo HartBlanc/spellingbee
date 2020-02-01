@@ -41,6 +41,19 @@
       flex-basis: 90%;
     }
 
+    cf-chat-response {
+        font-size: 30px !important;
+    }
+
+    cf-input {
+        height: 200px !important;
+    }
+
+    textarea {
+        height: 85% !important;
+        font-size: 30px !important;
+    }
+
     @media screen and (min-width: 600px) {
       #page-name {
         font-size: 42px;
@@ -57,22 +70,24 @@
 </head>
 
 <body>
-  <nav id="topbar">
-    <div id="name-box">
-      <p id="page-name"> SPELLING BEE SOLVER</p>
+    <nav id="topbar">
+        <div id="name-box">
+          <p id="page-name"> SPELLING BEE SOLVER</p>
+        </div>
+        <div id="iconset">
+          <img src="https://cdn.pixabay.com/photo/2017/01/31/00/03/currency-2022440_960_720.png" alt="money bag">
+          <img src="https://cdn.pixabay.com/photo/2016/03/31/18/24/screwdriver-1294338_960_720.png" alt="screwdriver and spanner">
+          <img src="https://cdn.pixabay.com/photo/2013/07/12/12/56/home-146585_960_720.png" alt="home icon">
+        </div>
+    </nav>
+    <div>
+      <form cf-form method="get" action="https://0ivnhheeg4.execute-api.eu-west-2.amazonaws.com/default/solve">
+        <input type="text" name="std_letters" required="" placeholder="What are the standard letters?" >
+        <input type="text" name="special_letter" required="" placeholder="What is the special letter?">
+        <input type="number" min="1" max="30" name="min_length" required="" cf-input-placeholder="4" placeholder="What is the minimum word length?">
+        <input type="submit" value="Solve!">
+      </form>
     </div>
-    <div id="iconset">
-      <img src="https://cdn.pixabay.com/photo/2017/01/31/00/03/currency-2022440_960_720.png" alt="money bag">
-      <img src="https://cdn.pixabay.com/photo/2016/03/31/18/24/screwdriver-1294338_960_720.png" alt="screwdriver and spanner">
-      <img src="https://cdn.pixabay.com/photo/2013/07/12/12/56/home-146585_960_720.png" alt="home icon">
-    </div>
-  </nav>
-  <form cf-form method="get" action="https://0ivnhheeg4.execute-api.eu-west-2.amazonaws.com/default/solve">
-    <input type="text" name="std_letters" required="" placeholder="What are the standard letters?" >
-    <input type="text" name="special_letter" required="" placeholder="What is the special letter?">
-    <input type="number" min="1" max="30" name="min_length" required="" cf-input-placeholder="4" placeholder="What is the minimum word length?">
-    <input type="submit" value="Solve!">
-  </form>
 </body>
 
 </html>
