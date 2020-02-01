@@ -1,61 +1,39 @@
 import re
-
+import json
 
 def lambda_handler(event, context):
-
-    solve
+    results = solve(event["queryStringParameters"]['std_letters'],
+                    event["queryStringParameters"]['special_letter'],
+                    event["queryStringParameters"]['min_length'])
     
-    HTML_START = '''
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <title>sendToKindle</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <style>
-
-        </style>
-
-    </head>
-
-    <body>
-    <ul>
-'''
-
-    HTML_middle = ""
-
-    HTML_END = '''
-</ul>
-</body>
-
-</html>'''
-
-    results = solve(event['query']['std_letters'], event['query']['special_letter'], event['query']['min_length'])
-
-
-
-    HTML_middle = '\n'.join([f"<li>{result}</li>" for result in results])
-
-    return HTML_START + HTML_middle + HTML_END
-
-def solve(std_letters, special_letter, min_length=4):
+    response = {
+        "statusCode": 200,
+        "body": json.dumps(results)
+    }
     
-    allowed_letters = std_letters + [special_letter]
+    return response
+    
 
+def solve(std_letters, special_letter, min_length="4"):
+    
+    special_letter = special_letter.lower().strip()
+    std_letters = std_letters.lower().strip()
+    min_length = int(min_length.strip())
+    
+    allowed_letters = std_letters.split() + [special_letter]
+    
     with open("words_alpha.txt") as f:
-        words = f.read().split('\n')
-        print(words[0])
-        print(len(words))
-
-    print("[{''.join(allowed_letters)}]*{special_letter}[{allowed_letters}]*")
-
-    pattern = re.compile(f"[{''.join(allowed_letters)}]*{special_letter}[{''.join(allowed_letters)}]*")
-
-    return sorted([w for w in words if re.fullmatch(pattern, w) and len(w) >= min_length], key= lambda x : len(x), reverse=True)
-
-# if __name__ == "__main__":
-#     with open("index.html", "w") as f:
-#         f.write(lambda_handler({'std_letters': "habel".split(), 'special_letter': "k", 'min_length': 4}, None))
-
+        words = f.read()
+    
+    pattern = re.compile(
+        f"^[{''.join(allowed_letters)}]*{special_letter}[{''.join(allowed_letters)}]*$",
+        re.MULTILINE)
+    
+    return [m for m in re.findall(pattern, words) if len(m) >= min_length]
+    
+    # with open("words_alpha.txt") as f:
+    #     words = f.read().split('\n')
+    
+    # pattern = re.compile(f"[{''.join(allowed_letters)}]*{special_letter}[{''.join(allowed_letters)}]*")
+    
+    # return [w for w in words if re.match(pattern, w) and len(w) >= min_length]
